@@ -7,7 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.korniykom.todo_list.ui.screens.EditTodoScreen
 import com.korniykom.todo_list.ui.screens.LoadingScreen
+import com.korniykom.todo_list.ui.screens.TodosScreen
 
 @Composable
 fun TodoNavHost(
@@ -21,7 +23,7 @@ fun TodoNavHost(
             LoadingScreen(onLoadingFinished = { navController.navigate(Screen.Todos.route) })
         }
         composable(route = Screen.Todos.route) {
-
+            TodosScreen( navigateToEdit ={ navController.navigate (Screen.Edit.createRoute(0L) )})
         }
         composable(
             route = Screen.Edit.route , arguments = listOf(
@@ -30,7 +32,7 @@ fun TodoNavHost(
                     defaultValue = 0L
                 })
         ) {
-
+            EditTodoScreen()
         }
 
     }
