@@ -10,11 +10,11 @@ actual class TodoRepository {
         Todo(
             id = 1, title = "todo1", description = "todo", isCompleted = false
         ), Todo(
-            id = 1, title = "todo1", description = "todo", isCompleted = false
+            id = 2, title = "todo1", description = "todo", isCompleted = false
         ), Todo(
-            id = 1, title = "todo1", description = "todo", isCompleted = false
+            id = 3, title = "todo1", description = "todo", isCompleted = false
         ), Todo(
-            id = 1, title = "todo1", description = "todo", isCompleted = false
+            id = 4, title = "todo1", description = "todo", isCompleted = false
         )
     )
     private val _todosFlow = MutableStateFlow(dummyTodo.toList())

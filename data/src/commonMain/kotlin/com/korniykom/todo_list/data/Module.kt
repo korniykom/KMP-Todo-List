@@ -1,9 +1,11 @@
 package com.korniykom.todo_list.data
 
+import com.korniykom.todo_list.domain.repository.NetworkRepository
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val dataModule = module {
-    single {
-        TodoRepository()
-    }
+    singleOf(::TodoRepository)
+    singleOf(::NetworkRepositoryImpl).bind<NetworkRepository>()
 }

@@ -10,11 +10,11 @@ actual class TodoRepository {
         Todo(
             id = 1, title = "todo1", description = "todo", isCompleted = false
         ), Todo(
-            id = 1, title = "todo1", description = "todo", isCompleted = false
+            id = 2, title = "todo1", description = "todo", isCompleted = false
         ), Todo(
-            id = 1, title = "todo1", description = "todo", isCompleted = false
+            id = 3, title = "todo1", description = "todo", isCompleted = false
         ), Todo(
-            id = 1, title = "todo1", description = "todo", isCompleted = false
+            id = 4, title = "todo1", description = "todo", isCompleted = false
         )
     )
     private val _todosFlow = MutableStateFlow(dummyTodo.toList())
@@ -47,6 +47,10 @@ actual class TodoRepository {
     }
 
     actual suspend fun deleteTodo(id: Long) {
-
+        val index = dummyTodo.indexOfFirst { it.id == id }
+        if (index != -1) {
+            dummyTodo.removeAt(index)
+            _todosFlow.update { dummyTodo.toList() }
+        }
     }
 }

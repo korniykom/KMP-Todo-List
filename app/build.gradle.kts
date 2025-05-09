@@ -31,6 +31,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(project(":domain"))
+            implementation(project(":data"))
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
