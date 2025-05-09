@@ -47,7 +47,6 @@ actual class TodoRepository {
     }
 
     actual suspend fun deleteTodo(id: Long) {
-        dummyTodo.removeIf { it.id == id }
-        _todosFlow.update { dummyTodo.toList() }
+
     }
 }

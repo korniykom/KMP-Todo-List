@@ -32,10 +32,12 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
         }
         commonMain.dependencies {
             implementation(project(":domain"))
             implementation(libs.koin.core)
+            implementation(compose.runtime)
 
 
 
