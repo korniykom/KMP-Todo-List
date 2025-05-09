@@ -1,9 +1,9 @@
-package com.korniykom.todo_list.domain.repository
+package com.korniykom.todo_list.data
 
 import com.korniykom.todo_list.domain.model.Todo
 import kotlinx.coroutines.flow.Flow
 
-interface TodoRepository {
+expect class TodoRepository() {
     fun getTodos() : Flow<List<Todo>>
     suspend fun getTodoById(id : Long) : Todo?
     suspend fun insertTodo(todo : Todo) : Long

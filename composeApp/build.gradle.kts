@@ -49,7 +49,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(project(":app"))
-
+            implementation(project(":data"))
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
