@@ -1,6 +1,6 @@
-package com.korniykom.domain.repository
+package com.korniykom.todo_list.domain.repository
 
-import com.korniykom.domain.model.Todo
+import com.korniykom.todo_list.domain.model.Todo
 import kotlinx.coroutines.flow.Flow
 
 interface TodoRepository {

@@ -1,4 +1,4 @@
-package com.korniykom.domain.model
+package com.korniykom.todo_list.domain.model
 
 data class Todo(
     val id : Long = 0 ,
