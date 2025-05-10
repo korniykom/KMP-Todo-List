@@ -14,7 +14,6 @@ import kotlinx.serialization.json.Json
 actual class NetworkRepositoryImpl: NetworkRepository {
     private val client = createHttpClient()
 
-    @RequiresApi(Build.VERSION_CODES.O)
     actual override suspend fun getPublicIp(): String {
         return client.get("https://api.ipify.org").bodyAsText()
     }
