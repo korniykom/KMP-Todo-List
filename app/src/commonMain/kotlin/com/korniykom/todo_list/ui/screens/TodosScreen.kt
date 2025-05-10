@@ -51,7 +51,7 @@ fun TodosScreen(
         ) {
             LazyColumn {
                 items(
-                    items = todos , key = { it.id }) { item ->
+                    items = todos ) { item ->
                     Box(
                         modifier = Modifier.padding(8.dp)
                     ) {
