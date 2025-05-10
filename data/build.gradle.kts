@@ -59,7 +59,11 @@ kotlin {
 
 
         }
-        jsMain.dependencies {
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
 
     }
