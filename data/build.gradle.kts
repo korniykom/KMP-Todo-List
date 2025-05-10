@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -32,7 +33,10 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
-
+            implementation(libs.ktor.client.android)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
         commonMain.dependencies {
             implementation(project(":domain"))
@@ -48,6 +52,11 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
+
+
+        }
+        jsMain.dependencies {
         }
 
     }
