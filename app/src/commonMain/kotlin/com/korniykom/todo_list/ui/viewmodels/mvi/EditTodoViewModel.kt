@@ -3,8 +3,8 @@ package com.korniykom.todo_list.ui.viewmodels.mvi
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.korniykom.todo_list.data.TodoRepository
 import com.korniykom.todo_list.domain.model.Todo
+import com.korniykom.todo_list.domain.repository.TodoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
