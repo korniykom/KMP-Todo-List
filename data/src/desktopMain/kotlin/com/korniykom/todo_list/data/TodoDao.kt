@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TodoDao {
-
     @Query("SELECT * FROM todos ORDER BY id DESC")
     suspend fun getTodos() : List<TodoEntity>
 

@@ -2,53 +2,62 @@ package com.korniykom.todo_list.data
 
 import com.korniykom.todo_list.domain.model.Todo
 import com.korniykom.todo_list.domain.repository.TodoRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
-actual class TodoRepositoryImpl: TodoRepository {
-    private val dummyTodo = mutableListOf(
-        Todo(
-            id = 1, title = "todo1", description = "todo", isCompleted = false
-        ), Todo(
-            id = 2, title = "todo1", description = "todo", isCompleted = false
-        ), Todo(
-            id = 3, title = "todo1", description = "todo", isCompleted = false
-        ), Todo(
-            id = 4, title = "todo1", description = "todo", isCompleted = false
-        )
-    )
-    private val _todosFlow = MutableStateFlow(dummyTodo.toList())
 
-    actual override fun getTodos(): Flow<List<Todo>> = _todosFlow
+actual class TodoRepositoryImpl(
+    private val todoDao: TodoDao
+) : TodoRepository {
+
+    private val dbChangeSignal = MutableSharedFlow<Unit>(replay = 1)
+    private val scope = CoroutineScope(Dispatchers.Default)
+
+    init {
+        scope.launch {
+            dbChangeSignal.emit(Unit)
+        }
+    }
+
+    actual override fun getTodos(): Flow<List<Todo>> {
+        return dbChangeSignal.flatMapLatest {
+            flow {
+                val todoList = todoDao.getTodos().map { it.toDomainModel() }
+                emit(todoList)
+            }
+        }.distinctUntilChanged()
+    }
 
     actual override suspend fun getTodoById(id: Long): Todo? {
-        return dummyTodo.find { it.id == id }
+        return todoDao.getTodoById(id)?.toDomainModel()
     }
 
     actual override suspend fun insertTodo(todo: Todo): Long {
-        val newTodo = if (todo.id <= 0) {
-            val newId = (dummyTodo.maxOfOrNull { it.id } ?: 0) + 1
-            todo.copy(id = newId)
-        } else {
-            todo
-        }
-
-        dummyTodo.add(newTodo)
-        _todosFlow.update { dummyTodo.toList() }
-        return newTodo.id
+        val id = todoDao.insertTodo(TodoEntity.fromDomainModel(todo))
+        notifyDbChanged()
+        return id
     }
 
     actual override suspend fun updateTodo(todo: Todo) {
-        val index = dummyTodo.indexOfFirst { it.id == todo.id }
-        if (index != -1) {
-            dummyTodo[index] = todo
-            _todosFlow.update { dummyTodo.toList() }
-        }
+        todoDao.updateTodo(TodoEntity.fromDomainModel(todo))
+        notifyDbChanged()
     }
 
     actual override suspend fun deleteTodo(id: Long) {
-        dummyTodo.removeIf { it.id == id }
-        _todosFlow.update { dummyTodo.toList() }
+        todoDao.deleteTodo(id)
+        notifyDbChanged()
+    }
+
+    private fun notifyDbChanged() {
+        scope.launch {
+            dbChangeSignal.emit(Unit)
+        }
     }
 }
