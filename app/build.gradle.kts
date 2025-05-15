@@ -42,6 +42,7 @@ kotlin {
             api(libs.navigation.compose)
             implementation(libs.bundles.koin.compose)
             implementation(libs.koin.core)
+            implementation(libs.cmptoast)
         }
 
         desktopMain.dependencies {

@@ -18,6 +18,11 @@ import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,7 +38,7 @@ fun SwipeableTodoCard(
     onCheckChange: (Boolean) -> Unit,
     title: String,
     onDelete: () -> Unit,
-    onEdit: () -> Unit = {}
+    onEdit: () -> Unit = {},
 ) {
     val dismissState = rememberSwipeToDismissBoxState(
         confirmValueChange = {
@@ -68,7 +73,7 @@ fun SwipeableTodoCard(
         enableDismissFromEndToStart = true,
     ) {
         TodoCard(
-            checked = checked, onCheckChange = onCheckChange, title = title, onEdit = onEdit
+            checked = checked, onCheckChange = onCheckChange, title = title, onEdit = onEdit,
         )
     }
 }
@@ -79,8 +84,10 @@ fun TodoCard(
     checked: Boolean,
     onCheckChange: (Boolean) -> Unit,
     title: String,
-    onEdit: () -> Unit
+    onEdit: () -> Unit,
 ) {
+
+
     Card {
         Row(
             modifier = modifier.fillMaxWidth().height(58.dp).padding(start = 4.dp, end = 16.dp),

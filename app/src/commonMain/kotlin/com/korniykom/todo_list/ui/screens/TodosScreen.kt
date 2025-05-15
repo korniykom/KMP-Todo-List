@@ -51,16 +51,16 @@ fun TodosScreen(
         ) {
             LazyColumn {
                 items(
-                    items = todos ) { item ->
+                    items = todos, key = {item -> item.id}) { item ->
                     Box(
                         modifier = Modifier.padding(8.dp)
                     ) {
                         SwipeableTodoCard(
-                            checked = item.isCompleted ,
-                            title = item.title ,
-                            onDelete = { viewModel.onTodoDelete(item.id) } ,
-                            onEdit = { onEdit(item.id) } ,
-                            onCheckChange = { viewModel.onToggleChecked(item) }
+                            checked = item.isCompleted,
+                            title = item.title,
+                            onDelete = { viewModel.onTodoDelete(item.id) },
+                            onEdit = { onEdit(item.id) },
+                            onCheckChange = { viewModel.onToggleChecked(item) },
                         )
                     }
                 }
@@ -68,3 +68,4 @@ fun TodosScreen(
         }
     }
 }
+
