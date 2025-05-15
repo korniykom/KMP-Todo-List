@@ -1,3 +1,6 @@
+@file:OptIn(ExperimentalComposeLibrary::class)
+
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -29,6 +32,14 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
         }
+
+        androidNativeTest.dependencies {
+            implementation(libs.junit)
+            implementation(libs.mockk)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.turbine)
+        }
+
         commonMain.dependencies {
             implementation(project(":domain"))
             implementation(project(":data"))
@@ -42,9 +53,14 @@ kotlin {
             api(libs.navigation.compose)
             implementation(libs.bundles.koin.compose)
             implementation(libs.koin.core)
-            implementation(libs.cmptoast)
         }
 
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(kotlin("test-annotations-common"))
+            implementation(libs.assertk)
+            implementation(compose.uiTest)
+        }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
@@ -65,4 +81,9 @@ android {
     }
 
     namespace = "com.korniykom.todo_list.app"
+
+
+}
+dependencies {
+
 }
