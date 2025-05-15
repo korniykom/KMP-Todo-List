@@ -25,9 +25,9 @@ import com.korniykom.todo_list.ui.viewmodels.mvvm.TodosViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TodosScreen(
-    viewModel : TodosViewModel ,
-    onEdit : (Long) -> Unit ,
-    onSave : () -> Unit
+    viewModel: TodosViewModel,
+    onEdit: (Long) -> Unit,
+    onSave: () -> Unit
 ) {
     val todos by viewModel.todos.collectAsState()
     val publicIp by viewModel.publicIp.collectAsState()
@@ -36,12 +36,12 @@ fun TodosScreen(
         TopAppBar(
             title = {
                 Text(
-                    text = "IP: $publicIp" , fontWeight = FontWeight.Bold
+                    text = "IP: $publicIp", fontWeight = FontWeight.Bold
                 )
             })
-    } , floatingActionButton = {
+    }, floatingActionButton = {
         FloatingActionButton(onClick = onSave) {
-            Icon(imageVector = Icons.Default.Add , contentDescription = "Add Todo Icon")
+            Icon(imageVector = Icons.Default.Add, contentDescription = "Add Todo Icon")
         }
     }) { paddingValues ->
         Box(
@@ -51,7 +51,7 @@ fun TodosScreen(
         ) {
             LazyColumn {
                 items(
-                    items = todos, key = {item -> item.id}) { item ->
+                    items = todos, key = { item -> item.id }) { item ->
                     Box(
                         modifier = Modifier.padding(8.dp)
                     ) {

@@ -19,47 +19,47 @@ import com.korniykom.todo_list.ui.viewmodels.mvi.EditTodoState
 
 @Composable
 fun EditTodoContent(
-    modifier : Modifier = Modifier ,
-    state : EditTodoState ,
-    onTitleChange : (String) -> Unit ,
-    onDescriptionChange : (String) -> Unit ,
-    onCheckChange : (Boolean) -> Unit ,
-    onSaveClicked : () -> Unit
+    modifier: Modifier = Modifier,
+    state: EditTodoState,
+    onTitleChange: (String) -> Unit,
+    onDescriptionChange: (String) -> Unit,
+    onCheckChange: (Boolean) -> Unit,
+    onSaveClicked: () -> Unit
 ) {
     Column {
         OutlinedTextField(
-            value = state.title ,
-            onValueChange = onTitleChange ,
-            label = { Text("Title") } ,
+            value = state.title,
+            onValueChange = onTitleChange,
+            label = { Text("Title") },
             modifier = modifier
                 .fillMaxWidth()
-                .testTag("textField title") ,
-            singleLine = true ,
+                .testTag("textField title"),
+            singleLine = true,
 
             )
         OutlinedTextField(
-            value = state.description ,
-            onValueChange = onDescriptionChange ,
-            label = { Text("Description") } ,
+            value = state.description,
+            onValueChange = onDescriptionChange,
+            label = { Text("Description") },
             modifier = modifier
                 .fillMaxWidth()
-                .testTag("textField description") ,
+                .testTag("textField description"),
             singleLine = true
         )
         Row(
             modifier = modifier
                 .height(48.dp)
-                .padding(top = 12.dp) ,
+                .padding(top = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Checkbox(
-                checked = state.isChecked ,
+                checked = state.isChecked,
                 onCheckedChange = onCheckChange
             )
             Text(text = " Mark as completed")
             Spacer(modifier = modifier.weight(1f))
             Button(
-                onClick = onSaveClicked ,
+                onClick = onSaveClicked,
             ) {
                 Text(text = "Save todo")
             }

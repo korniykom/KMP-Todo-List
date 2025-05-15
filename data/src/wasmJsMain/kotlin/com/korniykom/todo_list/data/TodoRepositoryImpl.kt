@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
-actual class TodoRepositoryImpl: TodoRepository {
+actual class TodoRepositoryImpl : TodoRepository {
     private val dummyTodo = mutableListOf(
         Todo(
             id = 1, title = "todo1", description = "todo", isCompleted = false

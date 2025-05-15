@@ -22,14 +22,14 @@ import kotlin.random.Random
 
 @Composable
 fun LoadingScreen(
-    modifier : Modifier = Modifier ,
-    onLoadingFinished : () -> Unit ,
+    modifier: Modifier = Modifier,
+    onLoadingFinished: () -> Unit,
 ) {
     val animationCycles = 6
-    val animationDuration : Long = 1000
+    val animationDuration: Long = 1000
     val boxColors =
-        remember { mutableStateListOf(Color.Green , Color.Green , Color.Green , Color.Green) }
-    val randomStartBox = remember { Random.nextInt(0 , 4) }
+        remember { mutableStateListOf(Color.Green, Color.Green, Color.Green, Color.Green) }
+    val randomStartBox = remember { Random.nextInt(0, 4) }
 
     LaunchedEffect(key1 = true) {
         for (cycle in 0 until animationCycles) {
@@ -43,8 +43,8 @@ fun LoadingScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp) ,
-        horizontalAlignment = Alignment.CenterHorizontally ,
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Row {
@@ -52,24 +52,24 @@ fun LoadingScreen(
                 Box(
                     modifier = modifier
                         .size(70.dp)
-                        .background(boxColors[1] , RoundedCornerShape(8.dp))
+                        .background(boxColors[1], RoundedCornerShape(8.dp))
                 ) {}
                 Box(
                     modifier = modifier
                         .size(70.dp)
-                        .background(boxColors[0] , RoundedCornerShape(8.dp))
+                        .background(boxColors[0], RoundedCornerShape(8.dp))
                 ) {}
             }
             Column {
                 Box(
                     modifier = modifier
                         .size(70.dp)
-                        .background(boxColors[2] , RoundedCornerShape(8.dp))
+                        .background(boxColors[2], RoundedCornerShape(8.dp))
                 ) {}
                 Box(
                     modifier = modifier
                         .size(70.dp)
-                        .background(boxColors[3] , RoundedCornerShape(8.dp))
+                        .background(boxColors[3], RoundedCornerShape(8.dp))
                 ) {}
             }
         }

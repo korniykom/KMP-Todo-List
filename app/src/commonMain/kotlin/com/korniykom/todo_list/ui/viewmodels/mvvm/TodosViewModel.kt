@@ -11,14 +11,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class TodosViewModel(
-    val todoRepository : TodoRepository,
-    private val networkRepository : NetworkRepository,
+    val todoRepository: TodoRepository,
+    private val networkRepository: NetworkRepository,
 ) : ViewModel() {
     private var _todos = MutableStateFlow<List<Todo>>(emptyList())
-    val todos : StateFlow<List<Todo>> = _todos
+    val todos: StateFlow<List<Todo>> = _todos
 
     private val _publicIp = MutableStateFlow("No IP address")
-    val publicIp : StateFlow<String> = _publicIp
+    val publicIp: StateFlow<String> = _publicIp
 
     init {
         viewModelScope.launch(Dispatchers.Default) {
@@ -30,22 +30,22 @@ class TodosViewModel(
         viewModelScope.launch(Dispatchers.Default) {
             try {
                 _publicIp.value = networkRepository.getPublicIp()
-            } catch (e : Exception) {
+            } catch (e: Exception) {
                 _publicIp.value = "Unable to fetch IP address"
             }
         }
     }
 
-    fun onTodoDelete(id : Long) {
+    fun onTodoDelete(id: Long) {
         viewModelScope.launch(Dispatchers.Default) {
             todoRepository.deleteTodo(id)
         }
     }
 
-    fun onToggleChecked(todo : Todo) {
+    fun onToggleChecked(todo: Todo) {
         viewModelScope.launch(Dispatchers.Default) {
             val currentCheckedState = todo.isCompleted
-            val newTodo = todo.copy(isCompleted = ! currentCheckedState)
+            val newTodo = todo.copy(isCompleted = !currentCheckedState)
             todoRepository.updateTodo(newTodo)
         }
     }

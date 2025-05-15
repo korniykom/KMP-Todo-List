@@ -14,4 +14,5 @@ val uiModule = module {
             todoRepository = get(),
             savedStateHandle = handle
         )
-    }}
+    }
+}

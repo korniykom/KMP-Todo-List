@@ -10,7 +10,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 
-actual class NetworkRepositoryImpl: NetworkRepository {
+actual class NetworkRepositoryImpl : NetworkRepository {
     private val client = createHttpClient()
     actual override suspend fun getPublicIp(): String {
         return client.get("https://api.ipify.org").bodyAsText()

@@ -7,4 +7,4 @@ val dataModule = module {
     includes(platformModule())
 }
 
-expect fun platformModule() : Module
+expect fun platformModule(): Module

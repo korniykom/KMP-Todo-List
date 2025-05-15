@@ -18,13 +18,13 @@ import org.koin.core.parameter.parametersOf
 
 @Composable
 fun TodoNavHost(
-    navController : NavHostController = rememberNavController() ,
-    startDestination : String = Screen.Loading.route
+    navController: NavHostController = rememberNavController(),
+    startDestination: String = Screen.Loading.route
 ) {
     val todosViewModel = koinViewModel<TodosViewModel>()
 
     NavHost(
-        navController = navController , startDestination = startDestination
+        navController = navController, startDestination = startDestination
     ) {
 
         composable(route = Screen.Loading.route) {
@@ -34,8 +34,8 @@ fun TodoNavHost(
             TodosScreen(
                 viewModel = todosViewModel,
                 onEdit = { todoId ->
-                navController.navigate(Screen.Edit.createRoute(todoId))
-            } , onSave = { navController.navigate(Screen.Edit.createRoute(0)) })
+                    navController.navigate(Screen.Edit.createRoute(todoId))
+                }, onSave = { navController.navigate(Screen.Edit.createRoute(0)) })
         }
         composable(
             route = Screen.Edit.route,

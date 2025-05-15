@@ -18,9 +18,9 @@ import org.junit.Test
 
 class TodoRepositoryImplTest {
     @MockK
-    private lateinit var todoDao : TodoDao
+    private lateinit var todoDao: TodoDao
 
-    private lateinit var todoRepositoryImpl : TodoRepositoryImpl
+    private lateinit var todoRepositoryImpl: TodoRepositoryImpl
 
     @Before
     fun setup() {
@@ -29,30 +29,30 @@ class TodoRepositoryImplTest {
     }
 
     @Test
-    fun getTodoById_returns_domain_model_when_exist() : Unit = runBlocking {
+    fun getTodoById_returns_domain_model_when_exist(): Unit = runBlocking {
         val todoId = 1L
         val todoEntity = TodoEntity(
-            id = todoId ,
-            title = "Brush teeth" ,
-            description = "Do it properly" ,
+            id = todoId,
+            title = "Brush teeth",
+            description = "Do it properly",
             isCompleted = true
         )
         val expectedTodo = Todo(
-            id = todoId ,
-            title = "Brush teeth" ,
-            description = "Do it properly" ,
+            id = todoId,
+            title = "Brush teeth",
+            description = "Do it properly",
             isCompleted = true
         )
         coEvery { todoDao.getTodoById((todoId)) } returns todoEntity
 
         val result = todoRepositoryImpl.getTodoById(todoId)
 
-        assertEquals(expectedTodo , result)
+        assertEquals(expectedTodo, result)
         coVerify { todoDao.getTodoById(todoId) }
     }
 
     @Test
-    fun getTodoBYId_returns_null_when_does_not_exist() : Unit = runBlocking {
+    fun getTodoBYId_returns_null_when_does_not_exist(): Unit = runBlocking {
         val todoId = 1L
         coEvery { todoDao.getTodoById((todoId)) } returns null
 
@@ -63,11 +63,11 @@ class TodoRepositoryImplTest {
     }
 
     @Test
-    fun insertTodo_convert_model_to_entity_and_return_id() : Unit = runBlocking {
+    fun insertTodo_convert_model_to_entity_and_return_id(): Unit = runBlocking {
         val todo = Todo(
-            id = 1 ,
-            title = "Go jogging" ,
-            description = "Go jogging from 7:30am to 8:30am" ,
+            id = 1,
+            title = "Go jogging",
+            description = "Go jogging from 7:30am to 8:30am",
             isCompleted = true
         )
         val todoEntity = TodoEntity.Companion.fromDomainModel(todo)
@@ -76,7 +76,7 @@ class TodoRepositoryImplTest {
 
         val result = todoRepositoryImpl.insertTodo(todo)
 
-        assertEquals(expectedId , result)
+        assertEquals(expectedId, result)
         coVerify {
             todoDao.insertTodo(match {
                 it.id == todoEntity.id && it.title == todoEntity.title
@@ -86,9 +86,9 @@ class TodoRepositoryImplTest {
     }
 
     @Test
-    fun updateTodo_convert_domain_model_and_call_dao() : Unit = runBlocking {
+    fun updateTodo_convert_domain_model_and_call_dao(): Unit = runBlocking {
         val todo = Todo(
-            id = 1 , title = "Cook dinner" , description = "Cook dinner today" , isCompleted = true
+            id = 1, title = "Cook dinner", description = "Cook dinner today", isCompleted = true
         )
         coEvery { todoDao.updateTodo(any()) } just runs
 
@@ -103,7 +103,7 @@ class TodoRepositoryImplTest {
     }
 
     @Test
-    fun deleteTodo_calls_dao_with_correct_id() : Unit = runBlocking {
+    fun deleteTodo_calls_dao_with_correct_id(): Unit = runBlocking {
         val todoId = 1L
         coEvery { todoDao.deleteTodo(any()) } just runs
 

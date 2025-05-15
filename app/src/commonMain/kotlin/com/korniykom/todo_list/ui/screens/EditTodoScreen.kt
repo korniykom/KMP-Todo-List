@@ -17,8 +17,7 @@ import com.korniykom.todo_list.ui.viewmodels.mvi.EditTodoViewModel
 
 @Composable
 fun EditTodoScreen(
-    viewModel : EditTodoViewModel
-    , onSave : () -> Unit = {}
+    viewModel: EditTodoViewModel, onSave: () -> Unit = {}
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -28,19 +27,19 @@ fun EditTodoScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(8.dp) , verticalArrangement = Arrangement.Center
+            .padding(8.dp), verticalArrangement = Arrangement.Center
     ) {
         EditTodoContent(
-            state = state ,
-            onTitleChange = { title -> viewModel.processIntent(EditTodoIntent.SetTitle(title)) } ,
+            state = state,
+            onTitleChange = { title -> viewModel.processIntent(EditTodoIntent.SetTitle(title)) },
             onDescriptionChange = { description ->
                 viewModel.processIntent(
                     EditTodoIntent.SetDescription(
                         description
                     )
                 )
-            } ,
-            onCheckChange = { checked -> viewModel.processIntent(EditTodoIntent.SetChecked(checked)) } ,
+            },
+            onCheckChange = { checked -> viewModel.processIntent(EditTodoIntent.SetChecked(checked)) },
             onSaveClicked = {
                 viewModel.processIntent(EditTodoIntent.SaveTodo)
                 onSave()
