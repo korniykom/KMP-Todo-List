@@ -5,7 +5,7 @@ import com.korniykom.todo_list.domain.repository.TodoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class FakeTodoRepository: TodoRepository {
+class FakeTodoRepository : TodoRepository {
     private val todoItems = mutableListOf<Todo>()
     private val todoFlow = MutableStateFlow<List<Todo>>(emptyList())
 
@@ -31,7 +31,7 @@ class FakeTodoRepository: TodoRepository {
 
     override suspend fun updateTodo(todo: Todo) {
         val index = todoItems.indexOfFirst { it.id == todo.id }
-        if(index != -1) {
+        if (index != -1) {
             todoItems[index] = todo
             updateFlowValue()
         }

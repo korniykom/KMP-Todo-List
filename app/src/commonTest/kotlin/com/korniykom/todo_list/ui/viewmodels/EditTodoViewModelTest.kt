@@ -2,8 +2,8 @@ package com.korniykom.todo_list.ui.viewmodels
 
 import androidx.lifecycle.SavedStateHandle
 import com.korniykom.todo_list.domain.model.Todo
-import com.korniykom.todo_list.ui.viewmodels.mvi.EditTodoViewModel
 import com.korniykom.todo_list.ui.viewmodels.mvi.EditTodoIntent
+import com.korniykom.todo_list.ui.viewmodels.mvi.EditTodoViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher

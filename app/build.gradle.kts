@@ -3,6 +3,7 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -13,6 +14,8 @@ plugins {
 
 kotlin {
     androidTarget {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
         @OptIn(ExperimentalKotlinGradlePluginApi::class) compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
@@ -59,6 +62,8 @@ kotlin {
             implementation(libs.kotlin.test)
             implementation(libs.turbine)
             implementation(libs.kotlinx.coroutines.test)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -72,6 +77,7 @@ android {
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -84,5 +90,6 @@ android {
 
 }
 dependencies {
-
+    androidTestImplementation(libs.compose.ui.test.junit4.android)
+    debugImplementation(libs.compose.ui.test.manifest)
 }

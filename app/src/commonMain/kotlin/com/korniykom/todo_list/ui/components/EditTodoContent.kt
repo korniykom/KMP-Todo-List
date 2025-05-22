@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.korniykom.todo_list.ui.viewmodels.mvi.EditTodoState
 
@@ -54,7 +56,10 @@ fun EditTodoContent(
         ) {
             Checkbox(
                 checked = state.isChecked,
-                onCheckedChange = onCheckChange
+                onCheckedChange = onCheckChange,
+                modifier = Modifier.semantics {
+                    contentDescription = "Checkbox"
+                }
             )
             Text(text = " Mark as completed")
             Spacer(modifier = modifier.weight(1f))

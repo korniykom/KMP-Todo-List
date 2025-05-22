@@ -93,7 +93,7 @@ class TodosViewModelTest {
 
         val remainingTodos = viewModel.todos.value
         assertEquals(1, remainingTodos.size)
-        assertFalse(remainingTodos.any {it.id == 2L})
-        assertTrue(remainingTodos.any {it.id == 1L})
+        assertFalse(remainingTodos.any { it.id == 2L })
+        assertTrue(remainingTodos.any { it.id == 1L })
     }
 }
