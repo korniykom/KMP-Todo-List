@@ -57,9 +57,8 @@ kotlin {
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-            implementation(kotlin("test-annotations-common"))
-            implementation(libs.assertk)
-            implementation(compose.uiTest)
+            implementation(libs.turbine)
+            implementation(libs.kotlinx.coroutines.test)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
