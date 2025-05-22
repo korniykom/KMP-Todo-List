@@ -15,7 +15,7 @@ import kotlin.test.Test
 
 
 @OptIn(ExperimentalCoroutinesApi::class, ExperimentalTestApi::class)
-class TodosScreenTestWithRealViewModel {
+class TodosScreenTest {
 
     private lateinit var todoRepository: FakeTodoRepository
     private lateinit var networkRepository: FakeNetworkRepository
