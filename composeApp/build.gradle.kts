@@ -18,12 +18,11 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     jvm("desktop")
-    
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "composeApp"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
@@ -40,15 +39,18 @@ kotlin {
         }
         binaries.executable()
     }
-    
+
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
         }
         commonMain.dependencies {
+            implementation(project(":app"))
+            implementation(project(":data"))
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -57,6 +59,8 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.koin.core)
+            implementation(libs.bundles.koin.compose)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
